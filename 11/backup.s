@@ -24,4 +24,29 @@ main:
 .type printReverse, @function
 printReverse:
     pushq %rbx # %rbx auf stack
-    movq %rsi, %rdx # 
+    movq %rdi, %rbx # %rbx = word
+    movq %rsi, %rdx # length in %rdx
+
+    # if (length == 0)
+    cmpq $0, %rdx
+    je .END
+
+    # length - 1
+    decq %rdx
+
+    # prepare fn call 
+    movq %rbx, %rdi
+    movq %rdx, %rsi
+
+    call printReverse
+
+     # prepare printf
+    movq $out, %rdi
+    movb word(, %rdx, 1), %al
+    movzbq %al, %rsi
+
+    call printf
+
+    .END:
+        popq %rbx
+        ret
