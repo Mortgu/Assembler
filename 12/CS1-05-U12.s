@@ -21,10 +21,12 @@ main:
     leaq farr2, %r10 # move array address of farr2 into %10
     
     # calc 1. expression
-    vmovss (%r9), %xmm3
-    vsubps 4(%r9), %xmm3, %xmm0
+    vmovss 4(%r9), %xmm2
+    vsubps %xmm2, %xmm0, %xmm0
 
     # calc 2. expression
+    sqrtss 12(%r9), %xmm2 
+    sqrtss 8(%r9), %xmm2 
 
     # calc 3. expression
 
